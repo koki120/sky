@@ -13,14 +13,14 @@ class Test(TestCase):
         for i, expected_alphabet in enumerate(expected_alphabets):
             self.assertEqual(expected_alphabet, number_to_alphabet(i))
 
-    # def test_to_convert_functions(self):
-    #     for i in range(1, 1000_000):
-    #         self.assertEqual(
-    #             i,
-    #             alphabetical_order_string_to_number(
-    #                 number_to_alphabetical_order_string(i)
-    #             ),
-    #         )
+    def test_to_convert_functions(self):
+        for i in range(1, 1000_000):
+            self.assertEqual(
+                i,
+                alphabetical_order_string_to_number(
+                    number_to_alphabetical_order_string(i)
+                ),
+            )
 
     def test_to_solver(self):
         self.assertEqual("a c d", solver(iter(["1", "b", "3", "1 2 3"])))

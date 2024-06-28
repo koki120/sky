@@ -46,13 +46,20 @@ def solver(input_stream: Iterable[str]) -> str:
     n_list = [int(num) for num in str(next(input_stream)).split()]
 
     for n in n_list:
-        current_skip = bisect.bisect_right(reserved_words, n)
-        while (
-            next_skip := bisect.bisect_right(reserved_words, n + current_skip)
-        ) != current_skip:
-            current_skip = next_skip
+        if len(reserved_words) == 0 or n < reserved_words[0]:
+            result.append(number_to_alphabetical_order_string(n))
+            continue
+            
+        left = 0
+        right = len(reserved_words)
+        while left + 1 < right:
+            center = (int)((left + right) / 2)
+            if center + n < reserved_words[center]:
+                right = center
+            else:
+                left = center
 
-        result.append(number_to_alphabetical_order_string(n + current_skip))
+        result.append(number_to_alphabetical_order_string(n + right))
 
     return " ".join(result)
 
